@@ -191,7 +191,7 @@ function changeBackground() {
     // if(window.screen.width>950)
     document.getElementById('image').setAttribute('src', li[Math.floor(Math.random() * 6)])
 }
-// let p = setInterval(changeBackground, 3000)
+let p = setInterval(changeBackground, 3000)
 
 let portrait = window.matchMedia("(orientation: portrait)");
 
@@ -207,40 +207,8 @@ portrait.addEventListener("change", function (e) {
     }
 })
 
-const track=document.getElementById('image-track');
 
-// document.getElementById('imgDisplay').onmousedown=e=>{
-window.onmousedown=e=>{
-    track.dataset.mouseDownAt = e.clientX;
-    const mouseDelta=parseFloat(track.dataset.mouseDownAt)
-}
 
-// document.getElementById('imgDisplay').onmousemove=e=>{
-window.onmousemove=e=>{
-    if(track.dataset.mouseDownAt==="0") return
 
-    const mouseDelta=parseFloat(track.dataset.mouseDownAt)-e.clientX;
-    let maxDelta=window.innerWidth/2;
 
-    const percentage=(mouseDelta/maxDelta)*-100;
-    let nextPercentage=parseFloat(track.dataset.prevPercentage)+percentage;
-    nextPercentage=Math.min(nextPercentage,0)
-    nextPercentage=Math.max(nextPercentage,-100)
 
-    track.dataset.percentage=nextPercentage;
-    // track.style.transform=`translate(${nextPercentage}%, -50%)`;
-    track.animate({
-        transform:`translate(${nextPercentage}%, -50%)`
-    },{duration:1200,fill:'forwards'})
-    for(const image of track.getElementsByClassName("image")){
-        // image.style.objectPosition=`${nextPercentage+100}% 50%`;
-        image.animate({
-            objectPosition:`${100+nextPercentage}% center`
-        },{duration:1200,fill:'forwards'})
-    }
-}
-
-window.onmouseup=()=>{
-    track.dataset.mouseDownAt="0";
-    track.dataset.prevPercentage=track.dataset.percentage;
-}

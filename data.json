@@ -1,0 +1,84 @@
+{
+    "Data": [
+        {
+            "id": 0,
+            "type": "rent",
+            "dateTime": "Mar 12 2022 10:00:00 PM",
+            "onlyData": "Mar 12 2022",
+            "price": 130,
+            "currentAmount": 5000
+        },
+        {
+            "id": 1,
+            "type": "rent",
+            "dateTime": "Jan 12 2022 10:00:00 PM",
+            "onlyData": "Jan 12 2022",
+            "price": 230,
+            "currentAmount": 5000
+        },
+        {
+            "id": 2,
+            "type": "rent",
+            "dateTime": "Mar 13 2022 10:00:00 AM",
+            "onlyData": "Mar 13 2022",
+            "price": 5000,
+            "currentAmount": 5000
+        },
+        {
+            "id": 3,
+            "type": "food",
+            "dateTime": "Jun 29 2022 10:00:00 AM",
+            "onlyData": "Jun 29 2022",
+            "price": 130,
+            "currentAmount": 5000
+        },
+        {
+            "id": 4,
+            "type": "rent",
+            "dateTime": "May 23 2022 10:00:00 AM",
+            "onlyData": "May 23 2022",
+            "price": 230,
+            "currentAmount": 5000
+        },
+        {
+            "id": 5,
+            "type": "food",
+            "dateTime": "Jan 2 2022 10:00:00 AM",
+            "onlyData": "Jan 2 2022",
+            "price": 250,
+            "currentAmount": 5000
+        },
+        {
+            "id": 6,
+            "type": "movie",
+            "dateTime": "Apr 27 2022 10:00:00 AM",
+            "onlyData": "Apr 27 2022",
+            "price": 400,
+            "currentAmount": 5000
+        },
+        {
+            "id": 7,
+            "type": "rent",
+            "dateTime": "Mar 12 2022 10:00:00 AM",
+            "onlyData": "Mar 12 2022",
+            "price": 3000,
+            "currentAmount": 5000
+        },
+        {
+            "id": 8,
+            "type": "food",
+            "dateTime": "Jul 1 2022 10:00:00 AM",
+            "onlyData": "Jul 1 2022",
+            "price": 530,
+            "currentAmount": 5000
+        },
+        {
+            "id": 9,
+            "type": "food",
+            "dateTime": "Jun 2 2022 10:00:00 AM",
+            "onlyData": "Jun 2 2022",
+            "price": 250,
+            "currentAmount": 5000
+        }
+    ]
+}

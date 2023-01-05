@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Monitor</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Settings&nbsp;&nbsp;&nbsp;<i class="bi bi-sliders"></i></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="mb-1">Themes: </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item list-group-item-action">
+                    <input class="form-check-input mx-1" type="radio" name="theme" id="darklyTheme" value="darkly">
+                    <label class="form-check-label" for="darklyTheme">
+                      Darkly
+                    </label>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <input class="form-check-input" type="radio" name="theme" id="sketchyTheme" value="sketchy">
+                    <label class="form-check-label" for="sketchyTheme">
+                      Sketchy
+                    </label>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <input class="form-check-input" type="radio" name="theme" id="vaporTheme" value="vapor">
+                    <label class="form-check-label" for="vaporTheme">
+                      Vapor
+                    </label>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <input class="form-check-input" type="radio" name="theme" id="quartzTheme" value="quartz">
+                    <label class="form-check-label" for="quartzTheme">
+                      Quartz
+                    </label>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <input class="form-check-input" type="radio" name="theme" id="morphTheme" value="morph">
+                    <label class="form-check-label" for="morphTheme">
+                      Morph
+                    </label>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <input class="form-check-input" type="radio" name="theme" id="defaultTheme" checked value="">
+                    <label class="form-check-label" for="defaultTheme">
+                      Default
+                    </li>
+                </ul>
+
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+    <nav class="sticky-top navbar navbar-expand-md navbar-light" id="transparent">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1"></span>
+            <h2 class="navbar-brand" id="titleBM">Budget Monitor</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" data-bs-toggle="modal" href="" data-bs-target="#exampleModal"
+                        id="addData">Add&nbsp;<i class="bi bi-cloud-plus-fill"></i></a>
+                    <a class="nav-link active" href="" id="offCan" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasExampleSetting" aria-controls="">Quick
+                        Look👀</a>
+                    <a class="nav-link active" href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                        aria-controls="offcanvasRight" id="newsBtn">News</button></a>
+                    <a type="button" class="mx-2 mt-1" data-bs-toggle="modal" data-bs-target="#settingModal">
+                        <i class="bi bi-gear-fill text-dark"></i>
+                    </a>
+                    <button type="button" class="btn text-dark" id="logOut">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <img src="res/Magnify-1s-200px.gif" id="gifLoader" style="width:150px;height:auto;">
+    <div class="container">
+        <img class="noLogin"
+            src="https://cdn.dribbble.com/users/1665077/screenshots/10738715/media/90712c2d7fd869e9d7586a108024d62c.gif">
+        <br>
+        <img class="noLogin" src="res/Vanilla-1s-280px.gif">
+        <button type="button" class="btn btn-info btn-lg" id="noLoginBtn">Home Page</button>
+    </div>
+    <div id="wrapper">
+        <!-- <div class="alert alert-warning alert-dismissible fade container" style="display:none;" role="alert">
+            <strong>One MORE</strong> entry will look good.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div> -->
+        <div class="alert alert-warning d-flex container align-items-center alert-dismissible fade" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div>
+                <strong>One MORE</strong> entry will look good.
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content add-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter Data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Choose a type:</label>
+                                <select id="types" class="w-100"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">or create a new one:</label>
+                                <input type="text" class="form-control" id="type-name">
+                                <div id="typeHelpS" class="form-text text-success"></div>
+                                <div id="typeHelpD" class="form-text text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio1" value="debit" checked>
+                                    <label class="form-check-label" for="inlineRadio1">Debit</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio2" value="credit">
+                                    <label class="form-check-label" for="inlineRadio2">Credit</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Amount:</label>
+                                <input class="form-control" id="amount-no">
+                                <div id="amountHelp" class="form-text text-danger"></div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button class="btn btn-primary" type="button" id="saveBtn">
+
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>DashBoard</h1>
+
+            <div class="row my-2">
+                <div class="col col-md-6">
+                    <div class="card aa">
+                        <div class="card-body">
+
+                            <!-- <p class="card-text">With supporting text below as a </p> -->
+
+                            <canvas id="myChart1" width="200px" height="200px"></canvas>
+                            <img src="res/Ripple-1s-200px.gif" alt="" id="firstL" class="chartGIF">
+                            <h2 class="noData"></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <div class="card bb">
+                        <div class="card-body">
+
+                            <!-- <p class="card-text">With supporting text below as a </p> -->
+
+                            <canvas id="myChart2"></canvas>
+                            <img src="res/Ripple-1s-200px.gif" alt="" id="firstS" class="chartGIF">
+                            <h2 class="noData"></h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="res/Spin-1s-200px.gif" alt="" id="gistGIF" class="chartGIF">
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content confirm-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body confirmMsg">
+                            Are You Sure...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="underConfirm">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container d-flex px-0"> -->
+            <!-- <div class="row col-md-12 justify-content-end align-self-center"> -->
+
+            <!-- </div> -->
+            <!-- </div> -->
+
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasExampleSetting"
+                aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Gist . . </h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body leftCanvas">
+                    <!-- <p>Try scrolling the rest of the page to see this option in action.</p> -->
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gistTotal"></li>
+                        <li class="list-group-item" id="gistPrev10"></li>
+                        <li class="list-group-item" id="gistCreditM"></li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+
+
+            <!-- <div class="card my-2" id="gistCard"> -->
+
+            <!-- <div class="card-body">
+
+                                </div> -->
+            <!-- <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="gistTotal"></li>
+                                    <li class="list-group-item" id="gistPrev10"></li>
+                                    <li class="list-group-item" id="gistCreditM"></li>
+                                </ul> -->
+
+            <!-- </div> -->
+
+            <div class="row reveal">
+                <div class="card w-100 col-12 cc dd">
+                    <div class="card-body">
+
+                        <!-- <p class="card-text">Daily progress.</p> -->
+
+                        <canvas id="myChart3" width="300px" height="300px"></canvas>
+                        <img src="res/Ripple-1s-200px.gif" alt="" id="firstT" class="chartGIF">
+                        <h2 class="noData">NO DATA !!</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img id="beerImg" src="https://cdn-icons-png.flaticon.com/512/3993/3993988.png"
+                                    class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"></h5>
+                                    <p>
+                                        <img src="https://cdn-icons-png.flaticon.com/32/4379/4379814.png">
+                                        <class="card-text"><strong>aman79patyal@gmail.com</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+                data-bs-delay="10000">
+                <div class="toast-header">
+                    <img src="res/smartphone.png" id="deviceLogo" class="rounded me-2" alt="...">
+                    <strong class="me-auto">Last login in</strong>
+                    <small id="deviceInfo"></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <p id="lastLoginTime"></p>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="reveal">
+        <table id="transTable" class="table container strip table-hover">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+        </section>
+
+        <!-- <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                aria-expanded="false" aria-controls="multiCollapseExample1">Buy a Beer🍻</a>
+
+        </p> -->
+
+
+        <!-- <div id="chart-wrapper"> -->
+        <!-- <canvas id="myChart1" width="400px" height="400px"></canvas> -->
+        <!-- <canvas id="myChart2" width="400px" height="400px"></canvas> -->
+        <!-- </div> -->
+    </div>
+
+
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" aria-labelledby="offcanvasWithBothOptionsLabel"
+        tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Financial News..</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body" id="news-offcanvas">
+            <img src="res/Wedges-3s-200px.gif" id="newsGIF">
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <script src="news.js"></script>
+</body>
+
+</html>
